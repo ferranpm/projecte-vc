@@ -7,7 +7,6 @@ function [ punxes ] = get_punxes(BW)
     BWO(:,:) = 0;
     BWO(CC.PixelIdxList{i}) = 1;
 
-
     BWN = medfilt2(BW - BWO, [9 9]);
     BWN = bwmorph(BWN, 'clean');
     CC = bwconncomp(BWN);
