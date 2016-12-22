@@ -2,7 +2,7 @@ function [ tipus ] = process(filename)
     I = imread(filename);
     BW = binarize(I);
 
-    if get_punxes(BW) > 10
+    if get_punxes(BW) > 14
         tipus = 2;
         return;
     end
@@ -12,7 +12,10 @@ function [ tipus ] = process(filename)
         return;
     end
 
-    % TODO: mirar convexitat per al tipus 10
+    if get_convex(BW) > 1000000
+        tipus = 10;
+        return;
+    end
 
     tija = size_tija(BW);
     if tija > 800 && tija < 2000
