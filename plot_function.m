@@ -20,3 +20,5 @@ for i = 1 : n
 end
 
 scatter(X, Y);
+set(gca, 'XTick', 0:15);
+grid on;
