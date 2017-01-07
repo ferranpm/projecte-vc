@@ -23,5 +23,24 @@ function [ tipus ] = process(filename)
         return;
     end
 
+    comp = compacity(BW);
+    if comp > 50
+        tipus = 14;
+        return;
+    elseif comp < 25
+        tipus = 15;
+        return;
+    end
+
+    if get_space(BW) > 3.4
+        tipus = 5;
+        return;
+    end
+
+    if tija == 0
+        tipus = '1,3,9';
+        return;
+    end
+
     tipus = -1;
 end
