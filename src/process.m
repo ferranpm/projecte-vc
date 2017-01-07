@@ -1,4 +1,4 @@
-function [ tipus ] = process(filename)
+function [ tipus ] = process(filename, predictor_1_3_9, predictor_8_12_13)
     I = imread(filename);
     BW = binarize(I);
 
@@ -19,7 +19,10 @@ function [ tipus ] = process(filename)
 
     tija = size_tija(BW);
     if tija > 800 && tija < 2000
-        tipus = '8, 12, 13';
+        % tipus = '8-12-13';
+        props = regionprops(BW, 'Extent', 'Eccentricity', 'Solidity');
+        Y = predict(predictor_8_12_13, cell2mat(struct2cell(props))');
+        tipus = str2num(Y{1});
         return;
     end
 
@@ -38,7 +41,10 @@ function [ tipus ] = process(filename)
     end
 
     if tija == 0
-        tipus = '1,3,9';
+        % tipus = '1-3-9';
+        props = regionprops(BW, 'Extent', 'Eccentricity', 'Solidity');
+        Y = predict(predictor_1_3_9, cell2mat(struct2cell(props))');
+        tipus = str2num(Y{1});
         return;
     end
 
