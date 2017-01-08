@@ -2,27 +2,18 @@ function [ tipus ] = process(filename, predictor_1_3_9, predictor_8_12_13)
     I = imread(filename);
     BW = binarize(I);
 
-    if get_punxes(BW) > 14
-        tipus = 2;
-        return;
-    end
-
     if get_aspect_ratio(BW) > 4
         tipus = 7;
         return;
     end
 
-    if get_convex(BW) <= 5
-        tipus = 10;
+    if get_punxes(BW) >= 10
+        tipus = 2;
         return;
     end
 
-    tija = size_tija(BW);
-    if tija > 800 && tija < 2000
-        % tipus = '8-12-13';
-        props = regionprops(BW, 'Extent', 'Eccentricity', 'Solidity');
-        Y = predict(predictor_8_12_13, cell2mat(struct2cell(props))');
-        tipus = str2num(Y{1});
+    if get_convex(BW) <= 5
+        tipus = 10;
         return;
     end
 
