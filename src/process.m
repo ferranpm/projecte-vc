@@ -37,7 +37,7 @@ function [ tipus ] = process(filename, predictor)
 
     props = get_props(I)';
     [Y scores] = predict(predictor, props);
-    if max(abs(scores)) >= 0.5
+    if max(scores) >= 0.5
         if iscell(Y)
             Y = Y{1};
         end
@@ -46,6 +46,7 @@ function [ tipus ] = process(filename, predictor)
         else
             tipus = Y;
         end
+        return;
     end
 
     tipus = -1;
