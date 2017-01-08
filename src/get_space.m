@@ -1,4 +1,4 @@
-function [ n ] = space(BW)
-    [f, c] = size(BW);
-    n = (f*c)/sum(sum(BW));
+function [ n ] = get_space(BW)
+    BWN = imresize(BW, [200 200], 'nearest');
+    n = sum(sum(BWN));
 end
