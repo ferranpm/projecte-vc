@@ -12,7 +12,7 @@ function [ tipus ] = process(filename, predictor_1_3_9, predictor_8_12_13)
         return;
     end
 
-    if get_convex(BW) > 1000000
+    if get_convex(BW) <= 5
         tipus = 10;
         return;
     end

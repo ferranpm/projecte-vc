@@ -1,5 +1,6 @@
 function [ n ] = get_convex(BW)
     X = bwconvhull(BW) - BW;
     C = regionprops(X, 'Area');
-    n = C.Area;
+    [f, c] = size(BW);
+    n = (f*c)/C.Area;
 end
