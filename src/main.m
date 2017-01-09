@@ -1,5 +1,5 @@
 img_dir = 'images/';
-imf = dir(strcat(img_dir, '*.tif'));
+imf = dir(strcat(img_dir, 'l*nr03*.tif'));
 n = length(imf);
 
 m = matfile('props');
@@ -10,19 +10,19 @@ labels = m.labels;
 
 predictor = TreeBagger(150, props', labels);
 
-
-failed = 0;
-unknown = 0;
+items = cell(n, 3);
 for i = 1 : n
      name = imf(i).name;
      tipus = process(strcat(img_dir, name), predictor);
      class = str2num(get_class(name));
-     if tipus ~= class && tipus ~= -1
-         failed = failed + 1;
-     elseif tipus == -1
-         unknown = unknown + 1;
-     end
+     items{i,1} = name;
+     items{i,2} = class;
+     items{i,3} = tipus;
      display({name, class, tipus});
 end
 
-display({n, failed, unknown});
+labels = [ items{:, 2} ];
+guesses = [ items{:, 3} ];
+unknown = sum(guesses == -1);
+hits = sum(guesses == labels);
+display({n, hits, unknown});
