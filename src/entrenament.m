@@ -6,16 +6,22 @@ n = length(imf);
 
 props = [];
 
-Y = [];
+labels = [];
+
+classes = [ 1 3 5 6 8 9 11 12 13 ];
 
 for i = 1 : n
      name = imf(i).name;
      class = str2num(get_class(name));
-     filename = strcat(img_dir, name);
-     I = imread(filename);
-     BW = binarize(I);
-     if class == 1 || class == 3 || class == 5 || class == 6 || class == 8 || class == 9 || class == 11 || class == 12 || class == 13
+     C = classes == class;
+     if sum(C) ~= 0
+         filename = strcat(img_dir, name);
+         display({name});
+         I = imread(filename);
          props = [ props get_props(I) ];
-         Y = [ Y class ];
+         labels = [ labels class ];
      end
 end
+
+save('props.mat', 'props');
+save('labels.mat', 'labels');

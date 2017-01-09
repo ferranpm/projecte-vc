@@ -6,7 +6,7 @@ m = matfile('props');
 props = m.props;
 
 m = matfile('labels');
-labels = m.Y;
+labels = m.labels;
 
 predictor = TreeBagger(150, props', labels);
 
