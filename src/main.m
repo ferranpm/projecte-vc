@@ -1,5 +1,5 @@
 img_dir = 'images/';
-imf = dir(strcat(img_dir, 'l*nr03*.tif'));
+imf = dir(strcat(img_dir, 'l*nr*.tif'));
 n = length(imf);
 
 m = matfile('props');

@@ -23,7 +23,7 @@ function [ tipus ] = process(filename, predictor)
     if comp > 50
         tipus = 14;
         return;
-    elseif comp < 25 && convex
+    elseif comp < 25
         tipus = 15;
         return;
     end
