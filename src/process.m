@@ -9,29 +9,22 @@ function [ tipus ] = process(filename, predictor)
     end
 
     punxes = get_punxes(BW);
-    if punxes >= 10
+    if punxes >= 6
         tipus = 2;
         return;
     end
 
-    convex = get_convex(BW);
-    if convex > 12500
+    comp = compacity(BW);
+    if comp > 200
         tipus = 10;
         return;
     end
 
-    comp = compacity(BW);
     if comp > 50
         tipus = 14;
         return;
     elseif comp < 25 && convex
         tipus = 15;
-        return;
-    end
-
-    tija = size_tija(BW);
-    if tija > 900
-        tipus = 4;
         return;
     end
 
